@@ -49,14 +49,19 @@ void Game::getLuckyPerson(){
 }
 
 void Game::play(){
-     
+    Scene* scene = new Scene();
     while (true) {
+      
         playThisRound();
         if (persons.size() <= 1) {
+            scene->cleanScreen();
+            scene->gameOverScreen(currentRound,tableBalance);
+            scene->drawScreen();
+            delete scene;
             break;
         }
         currentRound++;
-        Scene* scene = new Scene();
+    
         scene->prepareScreen(luckyNumber,currentRound,tableBalance,mostRichPerson.fullName,mostRichPerson.money);
         scene->drawScreen();
         Sleep(250); // Kullanýcý deneyimini arttýrmak adýna uygulamayý bekletiyorum.

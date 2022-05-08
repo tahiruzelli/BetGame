@@ -35,6 +35,10 @@ using namespace std;
     
     int Utils::getPadding(int total, int size) {
         int padding = (total - size) / 2;
+        if (padding < 0) {
+            throw "PADDING CON NOT BE SMALLER THEN 0";
+            return 0;
+        }
         return padding;
     }
     

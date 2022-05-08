@@ -11,7 +11,9 @@ private:
 public:
 	vector<string> lines{};
 	vector<Person> persons2{};
+	Person* person = new Person();
 	void readFile(string path);
 	void getPerson(string line);
 	void run(string path);
+	double toDouble(string txt);
 };

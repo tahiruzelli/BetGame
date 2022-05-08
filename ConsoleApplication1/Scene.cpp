@@ -12,6 +12,57 @@ using namespace std;
     static const int sceneWidth = 50;
     char scene[sceneWidth][sceneHeight];
 
+    void Scene::cleanScreen() {
+        for (int y = 0; y < sceneHeight; y++)
+        {
+            for (int x = 0; x < sceneWidth; x++)
+            {
+                scene[x][y] = ' ';
+            }
+        }
+    }
+
+    void Scene::gameOverScreen(int currentRound,double tableBalance) {
+        for (int y = 0; y < sceneHeight; y++)
+        {
+            for (int x = 0; x < sceneWidth; x++)
+            {
+
+                //çerçeve
+                if (y == 0 || y == sceneHeight - 1 || x == 0 || x == sceneWidth - 1 || x == 1 || x == sceneWidth - 2 || y == 2 || y == 3) {
+                    scene[x][y] = '#';
+                }
+                //boþluk 
+                else {
+                    scene[x][y] = ' ';
+
+                }
+                //8. en zengin kiþi ayracý
+                if (y == 7 && x != 0 && x != 1 && x != sceneWidth - 1 && x != sceneWidth - 2) {
+
+                    scene[x][y] = '-';
+                }
+                if (y >= 0 && y < 14) { // alanlar dahilinde mi kontrol
+                    //yazýlar yazdýrýlýyor!
+                    switch (y) {
+                    case 1:
+                        drawStringLine("TUR: " + to_string(currentRound), x, y);
+                        break;
+                    case 2:
+                        drawStringLine("MASA BAKIYE: " + to_string(tableBalance) + " TL", x, y);
+                        break;
+                    case 9:
+                        drawStringLine("OYUN BITTI", x, y);
+                        break;
+                    }
+                }
+                else {
+                    throw "OUT OF RANGE";
+                }
+            }
+        }
+    }
+
     void Scene::drawScreen() {
     for (int y = 0; y < sceneHeight; y++)
     {
@@ -58,27 +109,30 @@ using namespace std;
 
                       scene[x][y] = '-';
                   }
-                  //yazýlar yazdýrýlýyor!
-                  switch (y) {
-                  case 1:
-                      drawStringLine("SANSLI SAYI: " + to_string(luckyNumber), x, y);
-                      break;
-                  case 4:
-                      drawStringLine("TUR: " + to_string(currentRound), x, y);
-                      break;
-                  case 5:
-                      drawStringLine("MASA BAKIYE: " + to_string(tableBalance) + " TL", x, y);
-                      break;
-                  case 9:
-                      drawStringLine("EN ZENGIN KISI", x, y);
-                      break;
-                  case 10:
-                      drawStringLine(mostRichPersonName, x, y);
-                      break;
-                  case 11:
-                      drawStringLine("BAKIYESI: " + to_string(mostRichPersonMoney) + " TL", x, y);
-                      break;
-
+                  if(y >=0 && y<14){ // alanlar dahilinde mi kontrol
+                      //yazýlar yazdýrýlýyor!
+                      switch (y) {
+                      case 1:
+                          drawStringLine("SANSLI SAYI: " + to_string(luckyNumber), x, y);
+                          break;
+                      case 4:
+                          drawStringLine("TUR: " + to_string(currentRound), x, y);
+                          break;
+                      case 5:
+                          drawStringLine("MASA BAKIYE: " + to_string(tableBalance) + " TL", x, y);
+                          break;
+                      case 9:
+                          drawStringLine("EN ZENGIN KISI", x, y);
+                          break;
+                      case 10:
+                          drawStringLine(mostRichPersonName, x, y);
+                          break;
+                      case 11:
+                          drawStringLine("BAKIYESI: " + to_string(mostRichPersonMoney) + " TL", x, y);
+                          break;
+                      }
+                  }else{
+                      throw "OUT OF RANGE";
                   }
               }
           }

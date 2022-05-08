@@ -10,7 +10,7 @@ using namespace std;
 int main()
 {   
     FileReader* fileReader = new FileReader();
-    fileReader->run("C:/Users/Tahir Uzelli/source/repos/ConsoleApplication1/Kisiler.txt");
+    fileReader->run("C:/Users/Tahir Uzelli/Documents/GitHub/BetGame/Kisiler.txt");
     
     Game* game = new Game();
     game->persons = fileReader->persons2;

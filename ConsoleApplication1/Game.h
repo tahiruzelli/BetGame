@@ -11,6 +11,7 @@ public:
 	int luckyNumber;
 	double tableBalance;
 	Person mostRichPerson;
+	Person luckyPerson;
 	vector<Person> persons{};
 	void getMostRichPerson();
 	void playThisRound();
